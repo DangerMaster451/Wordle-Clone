@@ -1,18 +1,6 @@
 #pragma once
 #include<string>
 
-class Board {
-public:
-    Board() = default;
-    void updateTile(int index, char value);
-    bool checkWin();
-    void render();
-
-private:
-    Tile tiles[30];
-    std::string answer;
-};
-
 class Tile {
 public:
     Tile() = default;
@@ -21,8 +9,23 @@ public:
     void setIndex(int val);
     void setStoredCharacter(char val);
     void render(std::string answer);
+    Color getColor(std::string answer);
 
 private:
     int index;
     char storedCharacter;
+};
+
+class Board {
+public:
+    Board() = default;
+    std::string getAnswer();
+    void setAnswer(std::string val);
+    void updateTile(int index, char value);
+    bool checkWin();
+    void render();
+
+private:
+    Tile tiles[30];
+    std::string answer;
 };
