@@ -12,6 +12,11 @@ int main() {
     b.updateTile(2, 'n');
     b.updateTile(3, 'j');
     b.updateTile(4, 'e');
+    b.updateTile(5, 'c');
+    b.updateTile(6, 'r');
+    b.updateTile(7, 'a');
+    b.updateTile(8, 'n');
+    b.updateTile(9, 'e');
 
     while (!WindowShouldClose()) {
         BeginDrawing();

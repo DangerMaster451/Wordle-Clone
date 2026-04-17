@@ -18,7 +18,7 @@ private:
 
 class Board {
 public:
-    Board() = default;
+    Board();
     std::string getAnswer();
     void setAnswer(std::string val);
     void updateTile(int index, char value);
