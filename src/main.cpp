@@ -1,30 +1,39 @@
 #include "raylib.h"
 #include "board.h"
 
+void getInput(Board& b, int& index);
+
 int main() {
-    InitWindow(350, 700, "My Game");
+    InitWindow(350, 700, "Wordle");
     SetTargetFPS(60);
 
     Board b = Board();
+    int index = 0;
     b.setAnswer("crane");
-    b.updateTile(0, 'c');
-    b.updateTile(1, 'r');
-    b.updateTile(2, 'n');
-    b.updateTile(3, 'j');
-    b.updateTile(4, 'e');
-    b.updateTile(5, 'c');
-    b.updateTile(6, 'r');
-    b.updateTile(7, 'a');
-    b.updateTile(8, 'n');
-    b.updateTile(9, 'e');
 
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(BLACK);
+        getInput(b, index);
         b.render();
         EndDrawing();
     }
 
     CloseWindow();
     return 0;
+}
+
+void getInput(Board& b, int& index)
+{
+    int c = GetCharPressed();
+    if (c != 0 && index < 29)
+    {
+        b.updateTile(index, c);
+        index++;
+    }
+    if (IsKeyPressed(KEY_BACKSPACE) && index > 0)
+    {
+        b.updateTile(index, ' ');
+        index--;
+    }
 }

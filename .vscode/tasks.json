@@ -4,7 +4,7 @@
         {
             "label": "build and run",
             "type": "shell",
-            "command": "g++ src/*.cpp -o game.exe -lraylib -lopengl32 -lgdi32 -lwinmm && game.exe",
+            "command": "g++ src/*.cpp -o wordle.exe -lraylib -lopengl32 -lgdi32 -lwinmm && wordle.exe",
             "options": {
                 "shell": {
                     "executable": "cmd.exe",
