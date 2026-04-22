@@ -19,17 +19,31 @@ private:
     bool submitted;
 };
 
+class Line {
+public: 
+    Line();
+    bool isComplete();
+    std::string getWord();
+    void updateTile(int index, char val);
+    Tile* getTile(int index);
+    void render(std::string answer);
+    void sumbit();
+
+private:
+    Tile* tiles[5];
+};
+
 class Board {
 public:
     Board();
     std::string getAnswer();
     void setAnswer(std::string val);
-    void updateTile(int index, char value);
-    Tile& getTile(int index);
     bool checkWin();
     void render();
+    void updateTile(int lineIndex, int cursorIndex, char val);
+    Line* getLine(int index);
 
 private:
-    Tile tiles[30];
+    Line* lines[5];
     std::string answer;
 };

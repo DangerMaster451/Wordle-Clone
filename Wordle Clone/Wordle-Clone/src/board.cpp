@@ -2,48 +2,6 @@
 #include "board.h"
 #include <cmath>
 
-Board::Board()
-{
-    for (int i = 0; i < 30; i++)
-    {
-        updateTile(i, ' ');
-    }
-}
-
-std::string Board::getAnswer()
-{
-    return this->answer;
-}
-
-void Board::setAnswer(std::string val)
-{
-    this->answer = val;
-}
-
-void Board::updateTile(int index, char value)
-{
-    tiles[index].setIndex(index);
-    tiles[index].setStoredCharacter(value);
-}
-
-Tile& Board::getTile(int index)
-{
-    return tiles[index];
-}
-
-bool Board::checkWin()
-{
-    return false;
-}
-
-void Board::render()
-{
-    for (int i = 0; i < 30; i++)
-    {
-        tiles[i].render(getAnswer());
-    }
-}
-
 int Tile::getIndex()
 {
     return this->index;
@@ -97,3 +55,102 @@ Color Tile::getColor(std::string answer)
     }
     return WHITE;
 }
+
+Line::Line()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        tiles[i] = new Tile();
+        tiles[i]->setStoredCharacter(' ');
+        tiles[i]->setIndex(i);
+    }
+}
+
+bool Line::isComplete()
+{
+    for (char c : getWord())
+    {
+        if (c == ' ') {
+            return false;
+        }
+    }
+    return true;
+}
+
+std::string Line::getWord()
+{
+    std::string s = "";
+    for (Tile* t : tiles)
+    {
+        s += t->getStoredCharacter();
+    }
+    return s;
+}
+
+void Line::updateTile(int index, char val)
+{
+    tiles[index]->setStoredCharacter(val);
+}
+
+Tile* Line::getTile(int index)
+{
+    return tiles[index];
+}
+
+void Line::render(std::string answer)
+{
+    for (Tile* t : tiles)
+    {
+        t->render(answer);
+    }
+}
+
+void Line::sumbit()
+{
+    for (Tile* t : tiles)
+    {
+        t->setSubmitted(true);
+    }
+}
+
+Board::Board()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        lines[i] = new Line();
+    }
+}
+
+std::string Board::getAnswer()
+{
+    return this->answer;
+}
+
+void Board::setAnswer(std::string val)
+{
+    this->answer = val;
+}
+
+bool Board::checkWin()
+{
+    return false;
+}
+
+void Board::render()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        lines[i]->render(getAnswer());
+    }
+}
+
+void Board::updateTile(int lineIndex, int cursorIndex, char val)
+{
+    lines[lineIndex]->updateTile(cursorIndex, val);
+}
+
+Line* Board::getLine(int index)
+{
+    return lines[index];
+}
+
